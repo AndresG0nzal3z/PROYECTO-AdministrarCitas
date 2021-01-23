@@ -26,6 +26,9 @@ class Citas{
     setCita(cita){
         this.citas = [...this.citas, cita];
     }
+    eliminarCita(id){
+        this.citas = this.citas.filter( cita => cita.id !== id)
+    }
 }
 class UserInterfaces{
     MostrarAlerta(mensaje, tipo){
@@ -36,7 +39,7 @@ class UserInterfaces{
         if(tipo === 'error'){ // verifica que tipo de alerta es
             alerta.classList.add('alert-danger');
         }else{
-            alerta.classList.add('alert-succes');
+            alerta.classList.add('alert-success');
         }
         
         alerta.textContent = mensaje; // agrega el mensaje a la alerta
@@ -149,4 +152,14 @@ function reiniciarObjeto(){
     citaObj.fecha = '';
     citaObj.hora = '';
     citaObj.sintomas = '';
+}
+function eliminarCita(id){
+    // elimina la cita
+    adminCita.eliminarCita(id);
+
+    // muestra una alerta
+    UI.MostrarAlerta('La cita fue eliminada de manera correcta');
+
+    // refresca el html
+    UI.mostarCitas(adminCita); // agrega el html de la cita al DOM
 }
